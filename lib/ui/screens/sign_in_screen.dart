@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+  static const String routeName = 'sign-in';
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -24,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(height: 100),
               Text(
                 "Get Started With",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 20),
               CustomTextField(hintText: "Email"),
@@ -73,8 +75,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void _onTapSignInButton() {}
   void _onTapSignUpButton() {
-    Navigator.pushNamed(context, '/sign-up');
+    Navigator.pushNamed(context, SignUpScreen.routeName);
   }
+
   void _onTapForgetPasswordButton() {}
   void _onTapDontHaveAccountButton() {}
 }

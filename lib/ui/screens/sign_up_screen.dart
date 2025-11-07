@@ -5,6 +5,7 @@ import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+  static const String routeName = "/sign_up";
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -24,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 100),
               Text(
                 "Join With Us",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 20),
               CustomTextField(hintText: "Email"),

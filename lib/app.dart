@@ -54,10 +54,16 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
             ),
           ),
         ),
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          )
+        )
       ),
       routes: <String, WidgetBuilder>{
-        "/sign-in": (_) => SignInScreen(),
-        "/sign-up": (_) => SignUpScreen(),
+        SignInScreen.routeName: (_) => SignInScreen(),
+        SignUpScreen.routeName: (_) => SignUpScreen(),
       },
     );
   }
