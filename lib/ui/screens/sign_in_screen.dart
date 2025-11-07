@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/ui/screens/forgot_password_screen.dart';
 import 'package:task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
@@ -28,9 +29,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 "Get Started With",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox(height: 20),
+
               CustomTextField(hintText: "Email"),
-              CustomTextField(hintText: "Password"),
+              CustomTextField(hintText: "Password", obscureText: true),
               SizedBox(height: 20),
               FilledButton(
                 onPressed: _onTapSignInButton,
@@ -46,8 +47,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     RichText(
                       text: TextSpan(
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = _onTapDontHaveAccountButton,
                         text: "Don't have an account ? ",
                         style: TextStyle(color: Colors.black),
                         children: [
@@ -78,6 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.pushNamed(context, SignUpScreen.routeName);
   }
 
-  void _onTapForgetPasswordButton() {}
-  void _onTapDontHaveAccountButton() {}
+  void _onTapForgetPasswordButton() {
+    Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+  }
 }

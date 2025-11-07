@@ -3,6 +3,7 @@ import "package:flutter_svg/flutter_svg.dart";
 import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/utils/assets_path.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -21,10 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _moveToNextScreen() async {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
-    Navigator.pushReplacementNamed(
-      context,
-      SignInScreen.routeName,
-    );
+    Navigator.pushReplacementNamed(context, SignInScreen.routeName);
   }
 
   @override

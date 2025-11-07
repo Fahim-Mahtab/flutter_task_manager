@@ -1,19 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
-
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
-  static const String routeName = "/sign_up";
+class SetForgetPasswordScreen extends StatefulWidget {
+  const SetForgetPasswordScreen({super.key});
+  static const String routeName = "/set-forget-password";
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SetForgetPasswordScreen> createState() =>
+      _SetForgetPasswordScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SetForgetPasswordScreenState extends State<SetForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,31 +25,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               SizedBox(height: 100),
               Text(
-                "Join With Us",
+                "Set Password",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              CustomTextField(
-                hintText: "Email",
-                keyboardType: TextInputType.emailAddress,
+              Text(
+                "Minimum length password 8 characters with \nLetter and number combination",
+                style: Theme.of(context).textTheme.titleSmall,
               ),
-              CustomTextField(
-                hintText: "First Name",
-                keyboardType: TextInputType.text,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
-                ],
-              ),
-              CustomTextField(hintText: "Last Name"),
-              CustomTextField(
-                hintText: "Mobile",
-                keyboardType: TextInputType.phone,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                  ///prevents words to be entered
-                ],
-                maxLength: 11,
-              ),
+              SizedBox(height: 10),
               CustomTextField(hintText: "Password", obscureText: true),
+              CustomTextField(hintText: "Confirm Password", obscureText: true),
               SizedBox(height: 20),
               FilledButton(
                 onPressed: _onTapFilledButton,
@@ -62,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: "Already have an account ? ",
+                        text: "Have an account ? ",
                         style: TextStyle(color: Colors.black),
                         children: [
                           TextSpan(
@@ -86,9 +70,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-  void _onTapFilledButton(){
 
-  }
+  void _onTapFilledButton() {}
   void _onTapSignInButton() {
     Navigator.pushNamed(context, SignInScreen.routeName);
   }
