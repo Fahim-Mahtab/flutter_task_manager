@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
+
 class SetForgetPasswordScreen extends StatefulWidget {
   const SetForgetPasswordScreen({super.key});
   static const String routeName = "/set-forget-password";
@@ -38,7 +39,10 @@ class _SetForgetPasswordScreenState extends State<SetForgetPasswordScreen> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: _onTapFilledButton,
-                child: Icon(Icons.arrow_circle_right_outlined, size: 25),
+                child: Text(
+                  "Confirm",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
               SizedBox(height: 30),
               Center(
@@ -71,7 +75,10 @@ class _SetForgetPasswordScreenState extends State<SetForgetPasswordScreen> {
     );
   }
 
-  void _onTapFilledButton() {}
+  void _onTapFilledButton() {
+
+  }
+
   void _onTapSignInButton() {
     Navigator.pushNamed(context, SignInScreen.routeName);
   }

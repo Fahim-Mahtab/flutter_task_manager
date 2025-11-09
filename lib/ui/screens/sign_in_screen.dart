@@ -5,6 +5,8 @@ import 'package:task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
 
+import 'main_bottom_nav_bar.dart';
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
   static const String routeName = 'sign-in';
@@ -72,7 +74,14 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void _onTapSignInButton() {}
+  void _onTapSignInButton() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      MainBottomNavBar.routeName,
+      (route) => false,
+    );
+  }
+
   void _onTapSignUpButton() {
     Navigator.pushNamed(context, SignUpScreen.routeName);
   }

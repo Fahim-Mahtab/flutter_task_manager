@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/screens/forgot_password_screen.dart';
+import 'package:task_manager_app/ui/screens/main_bottom_nav_bar.dart';
 import 'package:task_manager_app/ui/screens/pin_verification_screen.dart';
 import 'package:task_manager_app/ui/screens/set_forget_password_screen.dart';
 import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
@@ -59,8 +60,12 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
         ),
         textTheme: TextTheme(
           titleLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-          titleMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          titleSmall: TextStyle(fontSize: 16, color: Colors.grey),
+          titleMedium: TextStyle(fontSize: 18, color: Colors.white),
+          titleSmall: TextStyle(
+            fontSize: 16,
+            color: Colors.grey,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       routes: <String, WidgetBuilder>{
@@ -69,6 +74,7 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
         ForgotPasswordScreen.routeName: (_) => ForgotPasswordScreen(),
         PinVerificationScreen.routeName: (_) => PinVerificationScreen(),
         SetForgetPasswordScreen.routeName: (_) => SetForgetPasswordScreen(),
+        MainBottomNavBar.routeName: (_) => MainBottomNavBar(),
       },
     );
   }

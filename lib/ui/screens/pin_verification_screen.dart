@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_manager_app/ui/screens/set_forget_password_screen.dart';
 import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
-import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
 
 class PinVerificationScreen extends StatefulWidget {
   const PinVerificationScreen({super.key});
@@ -36,7 +36,22 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               SizedBox(height: 10),
-              CustomTextField(hintText: "Email"),
+              PinCodeTextField(
+                backgroundColor: Colors.transparent,
+                appContext: context,
+                length: 6,
+                obscureText: false,
+                animationType: AnimationType.fade,
+                animationDuration: Duration(milliseconds: 300),
+                keyboardType: TextInputType.number,
+
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  activeFillColor: Colors.grey,
+                  inactiveFillColor: Colors.grey,
+                  selectedColor: Colors.grey,
+                ),
+              ),
               SizedBox(height: 8),
               FilledButton(
                 onPressed: _onTapFilledButton,
