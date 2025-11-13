@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/ui/screens/pin_verification_screen.dart';
-import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/pin_verification_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
+
+import '../../widgets/my_filled_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -19,7 +21,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       body: BackgroundScreen(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(30),
           child: Column(
             spacing: 8,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,10 +39,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               SizedBox(height: 10),
               CustomTextField(hintText: "Email"),
               SizedBox(height: 8),
-              FilledButton(
-                onPressed: _onTapFilledButton,
-                child: Icon(Icons.arrow_circle_right_outlined, size: 25),
-              ),
+              MyFilledButton(onTapFilledButton: _onTapFilledButton,),
               SizedBox(height: 50),
               Center(
                 child: Column(
@@ -71,9 +70,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
   }
+
   void _onTapFilledButton() {
     Navigator.pushNamed(context, PinVerificationScreen.routeName);
   }
+
   void _onTapSignInButton() {
     Navigator.pushNamed(context, SignInScreen.routeName);
   }

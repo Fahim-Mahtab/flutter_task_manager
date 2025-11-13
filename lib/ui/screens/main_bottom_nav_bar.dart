@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/ui/screens/taskScreens/cancelled_task_screen.dart';
+import 'package:task_manager_app/ui/screens/taskScreens/completed_task_screen.dart';
+import 'package:task_manager_app/ui/screens/taskScreens/new_task_list_screen.dart';
+import 'package:task_manager_app/ui/screens/taskScreens/progress_task_screen.dart';
+
+import '../widgets/my_app_bar.dart';
 
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({super.key});
@@ -8,42 +14,27 @@ class MainBottomNavBar extends StatefulWidget {
 }
 
 class _MainBottomNavBarState extends State<MainBottomNavBar> {
+  int _selectedIndex = 0;
+  static const List<Widget> _screens = <Widget>[
+    NewTaskListScreen(),
+    CompletedTaskScreen(),
+    CancelledTaskScreen(),
+    ProgressTaskScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green.shade50,
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-
-        title: Column(
-          children: [
-            Row(
-              spacing: 8,
-              children: [
-                CircleAvatar(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "User Name",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleSmall?.copyWith(color: Colors.white),
-                    ),
-                    Text(
-                      "user@gmail.com",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleSmall?.copyWith(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      appBar: MyAppBar(),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         destinations: [
           NavigationDestination(icon: Icon(Icons.task), label: "New Task"),
           NavigationDestination(
@@ -59,12 +50,6 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
             label: "Progress",
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
-        backgroundColor: Colors.green,
-        onPressed: () {},
-        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
 
@@ -19,7 +19,7 @@ class _SetForgetPasswordScreenState extends State<SetForgetPasswordScreen> {
     return Scaffold(
       body: BackgroundScreen(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(30),
           child: Column(
             spacing: 8,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,8 +34,16 @@ class _SetForgetPasswordScreenState extends State<SetForgetPasswordScreen> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               SizedBox(height: 10),
-              CustomTextField(hintText: "Password", obscureText: true),
-              CustomTextField(hintText: "Confirm Password", obscureText: true),
+              CustomTextField(
+                hintText: "Password",
+                obscureText: true,
+                maxLine: 1,
+              ),
+              CustomTextField(
+                hintText: "Confirm Password",
+                obscureText: true,
+                maxLine: 1,
+              ),
               SizedBox(height: 20),
               FilledButton(
                 onPressed: _onTapFilledButton,
@@ -75,9 +83,7 @@ class _SetForgetPasswordScreenState extends State<SetForgetPasswordScreen> {
     );
   }
 
-  void _onTapFilledButton() {
-
-  }
+  void _onTapFilledButton() {}
 
   void _onTapSignInButton() {
     Navigator.pushNamed(context, SignInScreen.routeName);

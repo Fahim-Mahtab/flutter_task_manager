@@ -9,8 +9,8 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.validator,
     this.inputFormatters,
-    this.maxLength
-
+    this.maxLength,
+    this.maxLine,
   });
   final String? Function(String?)? validator;
   final String hintText;
@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
+  final int? maxLine;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       inputFormatters: inputFormatters,
       maxLength: maxLength,
+      maxLines: maxLine,
       /*validator: (value) {
         if (value!.isEmpty) {
           return 'Please enter some text';

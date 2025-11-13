@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/ui/screens/forgot_password_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/forgot_password_screen.dart';
 import 'package:task_manager_app/ui/screens/main_bottom_nav_bar.dart';
-import 'package:task_manager_app/ui/screens/pin_verification_screen.dart';
-import 'package:task_manager_app/ui/screens/set_forget_password_screen.dart';
-import 'package:task_manager_app/ui/screens/sign_in_screen.dart';
-import 'package:task_manager_app/ui/screens/sign_up_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/pin_verification_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/set_forget_password_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/sign_up_screen.dart';
+import 'package:task_manager_app/ui/screens/profileScreen/profile_screen.dart';
 import 'package:task_manager_app/ui/screens/splash_screen.dart';
+import 'package:task_manager_app/ui/screens/taskScreens/add_task_screen.dart';
 
 class TaskManagerApp extends StatefulWidget {
   const TaskManagerApp({super.key});
@@ -75,6 +77,8 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
         PinVerificationScreen.routeName: (_) => PinVerificationScreen(),
         SetForgetPasswordScreen.routeName: (_) => SetForgetPasswordScreen(),
         MainBottomNavBar.routeName: (_) => MainBottomNavBar(),
+        AddTaskScreen.routeName: (_) => AddTaskScreen(),
+        ProfileScreen.routeName: (_) => ProfileScreen(),
       },
     );
   }
