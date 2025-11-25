@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/screens/authScreens/forgot_password_screen.dart';
-import 'package:task_manager_app/ui/screens/main_bottom_nav_bar.dart';
 import 'package:task_manager_app/ui/screens/authScreens/pin_verification_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/set_forget_password_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/sign_up_screen.dart';
-import 'package:task_manager_app/ui/screens/profileScreen/profile_screen.dart';
+import 'package:task_manager_app/ui/screens/main_bottom_nav_bar.dart';
+import 'package:task_manager_app/ui/screens/profileScreen/update_profile_screen.dart';
 import 'package:task_manager_app/ui/screens/splash_screen.dart';
 import 'package:task_manager_app/ui/screens/taskScreens/add_task_screen.dart';
 

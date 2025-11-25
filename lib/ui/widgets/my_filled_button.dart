@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyFilledButton extends StatelessWidget {
   final VoidCallback onTapFilledButton;
+
   const MyFilledButton({super.key, required this.onTapFilledButton});
 
   @override

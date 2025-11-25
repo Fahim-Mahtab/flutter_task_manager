@@ -8,7 +8,9 @@ import '../widgets/my_app_bar.dart';
 
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({super.key});
+
   static const String routeName = "/mainBottomNavBar";
+
   @override
   State<MainBottomNavBar> createState() => _MainBottomNavBarState();
 }

@@ -15,7 +15,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(height: 10,),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.separated(
               itemCount: 10,
@@ -30,7 +30,8 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
                   onNewTap: _newTaskTapped,
                   onEditTap: _editTaskTapped,
                   onDeleteTap: _deleteTaskTapped,
-                  buttonText: 'Completed',  taskStatusColor: Colors.green,
+                  buttonText: 'Completed',
+                  taskStatusColor: Colors.green,
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
@@ -45,5 +46,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
 }
 
 void _newTaskTapped() {}
+
 void _editTaskTapped() {}
+
 void _deleteTaskTapped() {}

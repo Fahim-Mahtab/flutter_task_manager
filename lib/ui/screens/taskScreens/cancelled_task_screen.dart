@@ -46,5 +46,7 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
 }
 
 void _newTaskTapped() {}
+
 void _editTaskTapped() {}
+
 void _deleteTaskTapped() {}

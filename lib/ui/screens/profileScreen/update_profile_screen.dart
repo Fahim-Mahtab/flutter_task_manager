@@ -4,10 +4,12 @@ import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
 import 'package:task_manager_app/ui/widgets/my_app_bar.dart';
 import 'package:task_manager_app/ui/widgets/my_filled_button.dart';
 
+import '../../widgets/photo_picker.dart';
+
 class ProfileScreen extends StatelessWidget {
   static const String routeName = '/profile-screen';
-  const ProfileScreen({super.key});
 
+  const ProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,8 @@ class ProfileScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 10),
-              CustomTextField(hintText: "Photos"),
+              Text("Please fill the form to continue"),
+              GestureDetector(onTap: _onTapPhotoPicker, child: PhotoPicker()),
               CustomTextField(hintText: "Email"),
               CustomTextField(hintText: "First Name"),
               CustomTextField(hintText: "Last Name"),
@@ -39,6 +42,6 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
+  void _onTapPhotoPicker() {}
   void _onTapFilledButton() {}
 }

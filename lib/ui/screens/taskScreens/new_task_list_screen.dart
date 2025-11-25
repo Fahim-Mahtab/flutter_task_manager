@@ -5,6 +5,7 @@ import '../../widgets/task_list_container.dart';
 
 class NewTaskListScreen extends StatefulWidget {
   const NewTaskListScreen({super.key});
+
   @override
   State<NewTaskListScreen> createState() => _NewTaskListScreenState();
 }
@@ -21,12 +22,14 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(),
-          _buildWidgetCard(),
-          Expanded(
-            child: ListView.separated(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(),
+            _buildWidgetCard(),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               itemCount: 10,
               itemBuilder: (context, index) {
                 return TaskListContainer(
@@ -47,8 +50,8 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
                 return SizedBox(height: 10);
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
@@ -98,5 +101,7 @@ Widget _buildWidgetCard() {
 }
 
 void _newTaskTapped() {}
+
 void _editTaskTapped() {}
+
 void _deleteTaskTapped() {}

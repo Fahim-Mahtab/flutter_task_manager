@@ -7,6 +7,7 @@ import '../../widgets/custom_text_field.dart';
 
 class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({super.key});
+
   static const String routeName = '/add-new-task';
 
   @override

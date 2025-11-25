@@ -7,6 +7,7 @@ import 'package:task_manager_app/ui/widgets/background_screen.dart';
 
 class PinVerificationScreen extends StatefulWidget {
   const PinVerificationScreen({super.key});
+
   static const String routeName = '/pin-verification';
 
   @override

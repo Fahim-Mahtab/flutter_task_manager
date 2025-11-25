@@ -5,6 +5,7 @@ import '../utils/assets_path.dart';
 
 class BackgroundScreen extends StatelessWidget {
   const BackgroundScreen({super.key, required this.child});
+
   final Widget child;
 
   @override

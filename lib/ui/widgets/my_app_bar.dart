@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/ui/screens/profileScreen/profile_screen.dart';
+import 'package:task_manager_app/ui/screens/profileScreen/update_profile_screen.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool tappable;
+
   const MyAppBar({super.key, this.tappable = true});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(

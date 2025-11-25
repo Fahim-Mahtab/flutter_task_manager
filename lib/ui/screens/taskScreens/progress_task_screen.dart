@@ -4,7 +4,6 @@ import '../../widgets/task_list_container.dart';
 
 class ProgressTaskScreen extends StatefulWidget {
   const ProgressTaskScreen({super.key});
-
   @override
   State<ProgressTaskScreen> createState() => _ProgressTaskScreenState();
 }
@@ -46,5 +45,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
 }
 
 void _newTaskTapped() {}
+
 void _editTaskTapped() {}
+
 void _deleteTaskTapped() {}

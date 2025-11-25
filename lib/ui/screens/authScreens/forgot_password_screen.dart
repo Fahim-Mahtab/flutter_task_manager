@@ -9,6 +9,7 @@ import '../../widgets/my_filled_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
+
   static const String routeName = '/forgot-password';
 
   @override
@@ -39,7 +40,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               SizedBox(height: 10),
               CustomTextField(hintText: "Email"),
               SizedBox(height: 8),
-              MyFilledButton(onTapFilledButton: _onTapFilledButton,),
+              MyFilledButton(onTapFilledButton: _onTapFilledButton),
               SizedBox(height: 50),
               Center(
                 child: Column(

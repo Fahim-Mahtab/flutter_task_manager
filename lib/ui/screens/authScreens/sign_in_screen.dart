@@ -4,11 +4,14 @@ import 'package:task_manager_app/ui/screens/authScreens/forgot_password_screen.d
 import 'package:task_manager_app/ui/screens/authScreens/sign_up_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
+
 import '../main_bottom_nav_bar.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
   static const String routeName = 'sign-in';
+
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -30,7 +33,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               CustomTextField(hintText: "Email"),
-              CustomTextField(hintText: "Password", obscureText: true,maxLine: 1,),
+              CustomTextField(
+                hintText: "Password",
+                obscureText: true,
+                maxLine: 1,
+              ),
               SizedBox(height: 20),
               FilledButton(
                 onPressed: _onTapSignInButton,
