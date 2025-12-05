@@ -23,6 +23,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
 
+  static String recoveryVerifyEmail(String email) {
+    return Urls.recoveryVerifyEmailUrl;
+  }
+
   bool _inProgress = false;
 
   @override
@@ -111,7 +115,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     _inProgress = true;
     setState(() {});
     NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.recoveryVerifyEmail(_emailController.text.trim()),
+      recoveryVerifyEmail(_emailController.text.trim()),
     );
     _inProgress = false;
     setState(() {});

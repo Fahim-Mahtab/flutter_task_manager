@@ -19,6 +19,9 @@ class PinVerificationScreen extends StatefulWidget {
 class _PinVerificationScreenState extends State<PinVerificationScreen> {
   bool _inProgress = false;
   final TextEditingController _pinTEController = TextEditingController();
+  static String recoveryVerifyOtp(String email, String otp) {
+    return Urls.recoveryVerifyOtpUrl;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +107,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     _inProgress = true;
     setState(() {});
     NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.recoveryVerifyOtp(email, _pinTEController.text.trim()),
+      recoveryVerifyOtp(email, _pinTEController.text.trim()),
     );
     _inProgress = false;
     setState(() {});

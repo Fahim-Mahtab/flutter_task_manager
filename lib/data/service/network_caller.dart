@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:task_manager_app/ui/controller/auth_controller.dart';
 
 class NetworkCaller {
   static Future<NetworkResponse> getRequest(String url) async {
@@ -8,7 +9,10 @@ class NetworkCaller {
     try {
       Uri uri = Uri.parse(url);
       _logReq(url);
-      Response response = await get(uri);
+      Response response = await get(
+        uri,
+        headers: {"token": AuthController.accessToken ?? ""},
+      );
       _logRes(url, response);
       final decodedData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -54,6 +58,7 @@ class NetworkCaller {
         uri,
         headers: {
           "Content-Type": "application/json",
+          "token": AuthController.accessToken ?? "",
         }, //header for post request to send json data to api
         body: jsonEncode(
           body,

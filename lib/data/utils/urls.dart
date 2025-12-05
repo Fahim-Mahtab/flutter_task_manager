@@ -4,14 +4,10 @@ class Urls {
   static const String loginUrl = "$_baseUrl/Login";
   static const String recoveryVerifyEmailUrl = "$_baseUrl/RecoverVerifyEmail";
   static const String recoveryVerifyOtpUrl = "$_baseUrl/RecoverVerifyOtp";
-  static const String recoverResetPasswordUrl =
-      "$_baseUrl/RecoverResetPassword";
+  static const String recoverResetPasswordUrl ="$_baseUrl/RecoverResetPassword";
+  static const String createTask = "$_baseUrl/createTask";
 
-  static String recoveryVerifyEmail(String email) {
-    return "$recoveryVerifyEmailUrl/$email";
-  }
 
-  static String recoveryVerifyOtp(String email, String otp) {
-    return "$recoveryVerifyOtpUrl/$email/$otp";
-  }
+
+
 }
