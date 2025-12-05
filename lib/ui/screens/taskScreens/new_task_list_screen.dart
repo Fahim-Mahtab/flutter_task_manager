@@ -5,6 +5,7 @@ import '../../widgets/task_list_container.dart';
 
 class NewTaskListScreen extends StatefulWidget {
   const NewTaskListScreen({super.key});
+  static const String routeName = '/all-task-list';
 
   @override
   State<NewTaskListScreen> createState() => _NewTaskListScreenState();
@@ -12,11 +13,7 @@ class NewTaskListScreen extends StatefulWidget {
 
 class _NewTaskListScreenState extends State<NewTaskListScreen> {
   void _floatingActionButtonPressed() {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      AddTaskScreen.routeName,
-      (route) => false,
-    );
+    Navigator.pushNamed(context, AddTaskScreen.routeName);
   }
 
   @override

@@ -26,4 +26,19 @@ class AuthController {
       );
     }
   }
+
+  static Future<bool> isUserAlreadyLoggedIn() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? token = sharedPreferences.getString(_tokenKey);
+    if (token != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<void> clearUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+  }
 }

@@ -31,6 +31,13 @@ class AddTaskScreen extends StatelessWidget {
               CustomTextField(hintText: 'Description', maxLine: 10),
               SizedBox(height: 20),
               MyFilledButton(onTapFilledButton: _onTapFilledButton),
+              SizedBox(height: 10),
+              FilledButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("cancel"),
+              ),
             ],
           ),
         ),

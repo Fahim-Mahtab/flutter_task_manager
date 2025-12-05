@@ -1,7 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/ui/screens/authScreens/forgot_password_screen.dart';
+import 'package:task_manager_app/data/models/user_model.dart';
+import 'package:task_manager_app/ui/controller/auth_controller.dart';
+import 'package:task_manager_app/ui/screens/authScreens/email_verification_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/sign_up_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
@@ -136,6 +138,9 @@ class _SignInScreenState extends State<SignInScreen> {
         body: requestBody,
       );
       if (response.isSuccess) {
+        UserModel userModel = UserModel.fromJson(response.body["data"]);
+        String accessToken = response.body["token"];
+        await AuthController.saveUserData(accessToken, userModel);
         if (mounted) {
           setState(() {
             _signInLoader = false;

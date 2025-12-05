@@ -4,6 +4,9 @@ import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/utils/assets_path.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 
+import '../controller/auth_controller.dart';
+import 'main_bottom_nav_bar.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -21,6 +24,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
+
+    if (!mounted) return;
+
+    bool isUserAlreadyLoggedIn = await AuthController.isUserAlreadyLoggedIn();
+
+    if (!mounted) return;
+
+    if (isUserAlreadyLoggedIn) {
+      await AuthController.getUserData();
+
+      if (!mounted) return;
+
+      if (AuthController.user != null) {
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, MainBottomNavBar.routeName);
+        return;
+      }
+    }
     if (!mounted) return;
     Navigator.pushReplacementNamed(context, SignInScreen.routeName);
   }

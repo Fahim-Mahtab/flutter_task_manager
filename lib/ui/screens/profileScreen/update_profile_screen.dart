@@ -35,13 +35,16 @@ class ProfileScreen extends StatelessWidget {
               CustomTextField(hintText: "Mobile"),
               CustomTextField(hintText: "Password"),
               SizedBox(height: 10),
-              MyFilledButton(onTapFilledButton: _onTapFilledButton),
+              MyFilledButton(onTapFilledButton: _onTapUpdateProfileButton),
             ],
           ),
         ),
       ),
     );
   }
+
   void _onTapPhotoPicker() {}
-  void _onTapFilledButton() {}
+  void _onTapUpdateProfileButton() {
+
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:task_manager_app/data/service/network_caller.dart';
+import 'package:task_manager_app/data/utils/urls.dart';
 import 'package:task_manager_app/ui/screens/authScreens/set_forget_password_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
@@ -15,8 +17,12 @@ class PinVerificationScreen extends StatefulWidget {
 }
 
 class _PinVerificationScreenState extends State<PinVerificationScreen> {
+  bool _inProgress = false;
+  final TextEditingController _pinTEController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final String email = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       body: BackgroundScreen(
         child: Padding(
@@ -37,6 +43,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
               ),
               SizedBox(height: 10),
               PinCodeTextField(
+                controller: _pinTEController,
                 backgroundColor: Colors.transparent,
                 appContext: context,
                 length: 6,
@@ -44,7 +51,6 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                 animationType: AnimationType.fade,
                 animationDuration: Duration(milliseconds: 300),
                 keyboardType: TextInputType.number,
-
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
                   activeFillColor: Colors.grey,
@@ -53,9 +59,15 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                 ),
               ),
               SizedBox(height: 8),
-              FilledButton(
-                onPressed: _onTapFilledButton,
-                child: Icon(Icons.arrow_circle_right_outlined, size: 25),
+              Visibility(
+                visible: _inProgress == false,
+                replacement: Center(child: CircularProgressIndicator()),
+                child: FilledButton(
+                  onPressed: () {
+                    _onTapFilledButton(email);
+                  },
+                  child: Icon(Icons.arrow_circle_right_outlined, size: 25),
+                ),
               ),
               SizedBox(height: 50),
               Center(
@@ -88,8 +100,27 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     );
   }
 
-  void _onTapFilledButton() {
-    Navigator.pushNamed(context, SetForgetPasswordScreen.routeName);
+  Future<void> _onTapFilledButton(String email) async {
+    _inProgress = true;
+    setState(() {});
+    NetworkResponse response = await NetworkCaller.getRequest(
+      Urls.recoveryVerifyOtp(email, _pinTEController.text.trim()),
+    );
+    _inProgress = false;
+    setState(() {});
+    if (response.isSuccess) {
+      Navigator.pushNamed(
+        context,
+        SetForgetPasswordScreen.routeName,
+        arguments: {"email": email, "otp": _pinTEController.text.trim()},
+      );
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(response.errorMessage)));
+      }
+    }
   }
 
   void _onTapSignInButton() {

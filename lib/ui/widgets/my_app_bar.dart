@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 import 'package:task_manager_app/ui/screens/profileScreen/update_profile_screen.dart';
+
+import '../controller/auth_controller.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool tappable;
@@ -13,11 +16,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: GestureDetector(
         onTap: tappable
             ? () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  ProfileScreen.routeName,
-                  (route) => false,
-                );
+                Navigator.pushNamed(context, ProfileScreen.routeName);
               }
             : null,
         child: Row(
@@ -45,6 +44,20 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
+      actions: [
+        IconButton(
+          onPressed: () async {
+            await AuthController.clearUserData();
+
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              SignInScreen.routeName,
+              (predicate) => false,
+            );
+          },
+          icon: Icon(Icons.logout),
+        ),
+      ],
     );
   }
 

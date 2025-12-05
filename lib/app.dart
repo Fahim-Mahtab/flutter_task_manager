@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/ui/screens/authScreens/forgot_password_screen.dart';
+import 'package:task_manager_app/ui/screens/authScreens/email_verification_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/pin_verification_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/set_forget_password_screen.dart';
 import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
@@ -79,6 +79,7 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
         MainBottomNavBar.routeName: (_) => MainBottomNavBar(),
         AddTaskScreen.routeName: (_) => AddTaskScreen(),
         ProfileScreen.routeName: (_) => ProfileScreen(),
+      //  NewTaskListScreen.routeName : (_) => NewTaskListScreen(),
       },
     );
   }

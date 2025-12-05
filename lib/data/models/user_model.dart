@@ -36,7 +36,6 @@ class UserModel {
   }
   Map<String, dynamic> toJson() {
     //used to convert object of class UserModel to json data and return it to caller function and handle it accordingly in caller function
-
     return {
       "_id": id,
       "email": email,
@@ -45,7 +44,6 @@ class UserModel {
       "mobile": mobile,
     };
   }
-
   // final String createdDate = "createdDate";
 }
 
