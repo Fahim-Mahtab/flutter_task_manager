@@ -142,8 +142,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: requestBody,
     );
     _isLoading = false;
+    setState(() {});
     if (response.isSuccess) {
-
       setState(() {});
       await AuthController.updateUserData(UserModel.fromJson((requestBody)));
       showSnackBar(context, "Profile Updated");
@@ -155,6 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _onTapPhotoPicker() async {
     final XFile? image = await _imagePicker.pickImage(
       source: ImageSource.gallery,
+      imageQuality: 50,
     );
     if (image != null) {
       _selectedImage = image;
