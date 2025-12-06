@@ -86,11 +86,11 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
                     title: _newTaskList[index].title,
                     description: _newTaskList[index].description,
                     dateText: 'Date : ${_newTaskList[index].createdDate}',
-
-                    onEditTap: _editTaskTapped,
+                    onEditTap: _editTaskStatusTapped,
                     onDeleteTap: _deleteTaskTapped,
                     buttonText: _newTaskList[index].status,
                     taskStatusColor: Colors.blue,
+
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
@@ -110,6 +110,23 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
     );
   }
 
+  void _deleteTaskTapped() {}
+  void _editTaskStatusTapped() {
+
+  }
+
+  /* void _onRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      _getNewTaskList();
+      _getNewTaskListCount();
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Page Refreshed')),
+    );
+    return;
+
+ }*/
   Future<void> _getNewTaskList() async {
     setState(() {
       _isLoading = true;
@@ -158,44 +175,3 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
     setState(() {});
   }
 }
-
-/*Widget _buildWidgetCard() {
-  return SizedBox(
-    height: 100,
-    child: ListView.builder(
-      itemCount: _newTaskListCount.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.all(8),
-          padding: EdgeInsets.all(12), // space inside the box
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "09",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 4),
-              Text(
-                "Cancelled",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    ),
-  );
-}*/
-
-void _editTaskTapped() {}
-
-void _deleteTaskTapped() {}

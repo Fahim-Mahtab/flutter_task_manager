@@ -95,6 +95,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
     if (mounted) {
       if (response.isSuccess) {
+        Navigator.pop(context);
         _isSubmitting = false;
         _clearTextFields();
         showSnackBar(context, "New Task Added");

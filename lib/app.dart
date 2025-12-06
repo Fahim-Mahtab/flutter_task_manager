@@ -9,17 +9,14 @@ import 'package:task_manager_app/ui/screens/profileScreen/update_profile_screen.
 import 'package:task_manager_app/ui/screens/splash_screen.dart';
 import 'package:task_manager_app/ui/screens/taskScreens/add_task_screen.dart';
 
-class TaskManagerApp extends StatefulWidget {
+class TaskManagerApp extends StatelessWidget {
   const TaskManagerApp({super.key});
-
-  @override
-  State<TaskManagerApp> createState() => _TaskManagerAppState();
-}
-
-class _TaskManagerAppState extends State<TaskManagerApp> {
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -79,7 +76,7 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
         MainBottomNavBar.routeName: (_) => MainBottomNavBar(),
         AddTaskScreen.routeName: (_) => AddTaskScreen(),
         ProfileScreen.routeName: (_) => ProfileScreen(),
-      //  NewTaskListScreen.routeName : (_) => NewTaskListScreen(),
+        //  NewTaskListScreen.routeName : (_) => NewTaskListScreen(),
       },
     );
   }

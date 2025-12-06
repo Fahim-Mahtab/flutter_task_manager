@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:task_manager_app/app.dart';
 import 'package:task_manager_app/ui/controller/auth_controller.dart';
+import 'package:task_manager_app/ui/screens/authScreens/sign_in_screen.dart';
 
 class NetworkCaller {
   static Future<NetworkResponse> getRequest(String url) async {
@@ -23,6 +25,13 @@ class NetworkCaller {
 
           ///Passed decoded data to body property of NetworkResponse
           ///class object and returned it to caller function
+        );
+      } else if (response.statusCode == 401) {
+        unAuthorization();
+        return NetworkResponse(
+          isSuccess: false,
+          responseCode: response.statusCode,
+          errorMessage: "Unauthorized",
         );
       } else {
         return NetworkResponse(
@@ -82,6 +91,13 @@ class NetworkCaller {
           body:
               decodedData, // Pass the decoded data to the body property of the NetworkResponse object.
         );
+      } else if (response.statusCode == 401) {
+        unAuthorization();
+        return NetworkResponse(
+          isSuccess: false,
+          responseCode: response.statusCode,
+          errorMessage: "Unauthorized",
+        );
       } else {
         return NetworkResponse(
           isSuccess: false,
@@ -96,6 +112,14 @@ class NetworkCaller {
         errorMessage: e.toString(),
       );
     }
+  }
+
+  static Future<void> unAuthorization() async {
+    await AuthController.clearUserData();
+    Navigator.pushNamed(
+      TaskManagerApp.navigatorKey.currentContext!,
+      SignInScreen.routeName,
+    );
   }
 
   static void _logReq(String url, {Map<String, dynamic>? body}) {

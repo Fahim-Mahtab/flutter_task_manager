@@ -5,7 +5,9 @@ class UserModel {
   final String lastName;
   final String mobile;
   //  final String password;
-
+ String get fullName{
+    return "$firstName $lastName";
+ }
   UserModel({
     required this.id,
     required this.email,

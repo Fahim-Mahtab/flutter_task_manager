@@ -28,13 +28,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "User Name",
+                  AuthController.user!.fullName,
                   style: Theme.of(
                     context,
                   ).textTheme.titleSmall?.copyWith(color: Colors.white),
                 ),
                 Text(
-                  "user@gmail.com",
+                  AuthController.user!.email,
                   style: Theme.of(
                     context,
                   ).textTheme.bodySmall?.copyWith(color: Colors.white70),
