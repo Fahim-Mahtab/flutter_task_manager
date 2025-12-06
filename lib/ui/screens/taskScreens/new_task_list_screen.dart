@@ -87,6 +87,7 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       for (Map<String, dynamic> jsonData in response.body["data"]) {
         list.add(TaskModel.fromJson(jsonData));
       }
+      //checking github update
       _newTaskList = list;
       setState(() {});
     } else {
