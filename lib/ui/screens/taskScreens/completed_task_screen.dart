@@ -45,7 +45,6 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
   }
 }
 
-void _newTaskTapped() {}
 
 void _editTaskTapped() {}
 

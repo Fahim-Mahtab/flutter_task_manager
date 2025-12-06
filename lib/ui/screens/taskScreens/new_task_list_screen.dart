@@ -90,7 +90,9 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       _newTaskList = list;
       setState(() {});
     } else {
-      showSnackBar(context, response.errorMessage);
+      if (mounted) {
+        showSnackBar(context, response.errorMessage);
+      }
     }
     _isLoading = false;
     setState(() {});
