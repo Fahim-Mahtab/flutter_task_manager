@@ -10,12 +10,14 @@
 "email": "email@gmail.com",
 "createdDate": "2024-11-01T12:20:25.564Z"
 },*/
+import 'package:intl/intl.dart';
+
 class TaskModel {
   final String id;
   final String title;
   final String description;
   final String status;
-  final DateTime createdDate;
+  final String createdDate;
   final String email;
 
   TaskModel({
@@ -33,7 +35,7 @@ class TaskModel {
       title: jsonData["title"],
       description: jsonData["description"],
       status: jsonData["status"],
-      createdDate: DateTime.parse(jsonData["createdDate"]),
+      createdDate: DateFormat().format(DateTime.parse(jsonData["createdDate"])),
     );
   }
   /*Map<String, dynamic> toJson() {

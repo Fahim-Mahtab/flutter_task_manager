@@ -8,4 +8,6 @@ class Urls {
       "$_baseUrl/RecoverResetPassword";
   static const String createTask = "$_baseUrl/createTask";
   static const String listOfTaskByStatus = "$_baseUrl/listTaskByStatus/New";
+  static const String taskCompleted = "$_baseUrl/listTaskByStatus/Completed";
+  static const String taskCount = "$_baseUrl/taskStatusCount";
 }

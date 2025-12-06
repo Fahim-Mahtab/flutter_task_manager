@@ -5,6 +5,7 @@ import 'package:task_manager_app/data/utils/urls.dart';
 import 'package:task_manager_app/ui/screens/taskScreens/add_task_screen.dart';
 import 'package:task_manager_app/ui/widgets/snack_bar_msg.dart';
 
+import '../../../data/models/task_count_model.dart';
 import '../../widgets/task_list_container.dart';
 
 class NewTaskListScreen extends StatefulWidget {
@@ -24,9 +25,11 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   void initState() {
     super.initState();
     _getNewTaskList();
+    _getNewTaskListCount();
   }
 
   List<TaskModel> _newTaskList = [];
+  List<TaskCountModel> _newTaskListCount = [];
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -34,8 +37,43 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(),
-            _buildWidgetCard(),
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                itemCount: _newTaskListCount.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(12), // space inside the box
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          _newTaskListCount[index].sum.toString(),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          _newTaskListCount[index].id,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
             Visibility(
               visible: _isLoading == false,
               replacement: Center(child: CircularProgressIndicator()),
@@ -46,14 +84,12 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
                 itemBuilder: (context, index) {
                   return TaskListContainer(
                     title: _newTaskList[index].title,
-                    description:
-                        'Description : ${_newTaskList[index].description}',
-                    dateText:
-                        'Date : ${_newTaskList[index].createdDate.toString().split(".")[0]}',
+                    description: _newTaskList[index].description,
+                    dateText: 'Date : ${_newTaskList[index].createdDate}',
 
                     onEditTap: _editTaskTapped,
                     onDeleteTap: _deleteTaskTapped,
-                    buttonText: 'New',
+                    buttonText: _newTaskList[index].status,
                     taskStatusColor: Colors.blue,
                   );
                 },
@@ -87,8 +123,31 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       for (Map<String, dynamic> jsonData in response.body["data"]) {
         list.add(TaskModel.fromJson(jsonData));
       }
-      //checking github update
+
       _newTaskList = list;
+      setState(() {});
+    } else {
+      if (mounted) {
+        showSnackBar(context, response.errorMessage);
+      }
+    }
+    _isLoading = false;
+    setState(() {});
+  }
+
+  Future<void> _getNewTaskListCount() async {
+    setState(() {
+      _isLoading = true;
+    });
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.taskCount);
+    if (response.isSuccess) {
+      _isLoading = false;
+      List<TaskCountModel> taskListCount = [];
+      for (Map<String, dynamic> jsonData in response.body["data"]) {
+        taskListCount.add(TaskCountModel.fromJson(jsonData));
+      }
+
+      _newTaskListCount = taskListCount;
       setState(() {});
     } else {
       if (mounted) {
@@ -100,11 +159,11 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   }
 }
 
-Widget _buildWidgetCard() {
+/*Widget _buildWidgetCard() {
   return SizedBox(
     height: 100,
     child: ListView.builder(
-      itemCount: 10,
+      itemCount: _newTaskListCount.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return Container(
@@ -135,7 +194,7 @@ Widget _buildWidgetCard() {
       },
     ),
   );
-}
+}*/
 
 void _editTaskTapped() {}
 
