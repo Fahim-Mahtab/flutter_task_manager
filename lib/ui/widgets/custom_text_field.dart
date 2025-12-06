@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLength,
     this.maxLine,
     this.controller,
+    this.readOnly = false,
   });
 
   final String? Function(String?)? validator;
@@ -22,11 +23,13 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final int? maxLine;
   final TextEditingController? controller;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      readOnly: readOnly,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey),

@@ -32,73 +32,80 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   List<TaskCountModel> _newTaskListCount = [];
   bool _isLoading = false;
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 100,
-              child: ListView.builder(
-                itemCount: _newTaskListCount.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(8),
-                    padding: EdgeInsets.all(12), // space inside the box
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          _newTaskListCount[index].sum.toString(),
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  itemCount: _newTaskListCount.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(12), // space inside the box
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            _newTaskListCount[index].sum.toString(),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          _newTaskListCount[index].id,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
+                          SizedBox(height: 4),
+                          Text(
+                            _newTaskListCount[index].id,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            Visibility(
-              visible: _isLoading == false,
-              replacement: Center(child: CircularProgressIndicator()),
-              child: ListView.separated(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _newTaskList.length,
-                itemBuilder: (context, index) {
-                  return TaskListContainer(
-                    title: _newTaskList[index].title,
-                    description: _newTaskList[index].description,
-                    dateText: 'Date : ${_newTaskList[index].createdDate}',
-                    onEditTap: _editTaskStatusTapped,
-                    onDeleteTap: _deleteTaskTapped,
-                    buttonText: _newTaskList[index].status,
-                    taskStatusColor: Colors.blue,
-
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(height: 10);
-                },
+              Visibility(
+                visible: _isLoading == false,
+                replacement: Center(child: CircularProgressIndicator()),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _newTaskList.length,
+                  itemBuilder: (context, index) {
+                    return TaskListContainer(
+                      title: _newTaskList[index].title,
+                      description: _newTaskList[index].description,
+                      dateText: 'Date : ${_newTaskList[index].createdDate}',
+                      onEditTap: _editTaskStatusTapped,
+                      onDeleteTap: _deleteTaskTapped,
+                      buttonText: _newTaskList[index].status,
+                      taskStatusColor: Colors.blue,
+                      onStatusChange: (status) {
+                        _changeTaskStatus(_newTaskList[index].id, status);
+                      },
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(height: 10);
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -111,22 +118,31 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   }
 
   void _deleteTaskTapped() {}
-  void _editTaskStatusTapped() {
+  void _editTaskStatusTapped() {}
 
+  Future<void> _onRefresh() async {
+    _getNewTaskList();
+    _getNewTaskListCount();
   }
 
-  /* void _onRefresh() async {
-    await Future.delayed(Duration(seconds: 2));
-    setState(() {
+  Future<void> _changeTaskStatus(String taskId, String status) async {
+    _isLoading = true;
+    setState(() {});
+    NetworkResponse response = await NetworkCaller.getRequest(
+      Urls.updateTaskStatus(taskId, status),
+    );
+    if (response.isSuccess) {
       _getNewTaskList();
       _getNewTaskListCount();
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Page Refreshed')),
-    );
-    return;
+    } else {
+      _isLoading = false;
+      setState(() {});
+      if (mounted) {
+        showSnackBar(context, response.errorMessage);
+      }
+    }
+  }
 
- }*/
   Future<void> _getNewTaskList() async {
     setState(() {
       _isLoading = true;

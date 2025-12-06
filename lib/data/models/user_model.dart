@@ -1,5 +1,4 @@
 class UserModel {
-  final String id;
   final String email;
   final String firstName;
   final String lastName;
@@ -9,7 +8,7 @@ class UserModel {
     return "$firstName $lastName";
  }
   UserModel({
-    required this.id,
+
     required this.email,
     required this.firstName,
     required this.lastName,
@@ -23,7 +22,7 @@ class UserModel {
     // returns json data and we need to convert it to object of class UserModel
     // and return it to caller function and handle it accordingly in caller function
     return UserModel(
-      id: jsonData["_id"], //passed id :   jsonData["_id"] because id is key in json data and value is _id in json data
+     //passed id :   jsonData["_id"] because id is key in json data and value is _id in json data
       email:
           jsonData["email"], //passed email :   jsonData["email"] because email is key in json data and value is email in json data
       firstName:
@@ -39,7 +38,6 @@ class UserModel {
   Map<String, dynamic> toJson() {
     //used to convert object of class UserModel to json data and return it to caller function and handle it accordingly in caller function
     return {
-      "_id": id,
       "email": email,
       "firstName": firstName,
       "lastName": lastName,

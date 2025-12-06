@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/task_model.dart';
-
 class TaskListContainer extends StatefulWidget {
   final String title;
   final String description;
@@ -11,6 +9,7 @@ class TaskListContainer extends StatefulWidget {
   final VoidCallback onEditTap;
   final VoidCallback onDeleteTap;
   final Color taskStatusColor;
+  final Function(String) onStatusChange;
   // 1. Add the property definition
 
   // final VoidCallback? onDeleteTap; Makes it optional use
@@ -24,7 +23,7 @@ class TaskListContainer extends StatefulWidget {
     required this.onDeleteTap,
     required this.buttonText,
     required this.taskStatusColor,
-
+    required this.onStatusChange,
   });
 
   @override
@@ -126,24 +125,56 @@ class _TaskListContainerState extends State<TaskListContainer> {
                 // trailing:  ,
                 title: Text("Completed"),
                 onTap: () {
+                  if (widget.buttonText == "Completed") {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Task is already in Completed")),
+                    );
+                    return;
+                  }
+                  widget.onStatusChange("Completed");
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                 title: Text("Cancelled"),
                 onTap: () {
+                  if (widget.buttonText == "Cancelled") {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Task is already in Cancelled")),
+                    );
+                    return;
+                  }
+                  widget.onStatusChange("Cancelled");
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text("Pending"),
+                title: Text("New"),
                 onTap: () {
+                  if (widget.buttonText == "New") {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Task is already in New")),
+                    );
+                    return;
+                  }
+                  widget.onStatusChange("New");
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text("In Progress"),
+                title: Text("Progress"),
                 onTap: () {
+                  if (widget.buttonText == "Progress") {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Task is already in Progress")),
+                    );
+                    return;
+                  }
+                  widget.onStatusChange("Progress");
                   Navigator.pop(context);
                 },
               ),
