@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:task_manager_app/data/service/network_caller.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/custom_text_field.dart';
-import 'package:task_manager_app/ui/widgets/snackbar_msg.dart';
+import 'package:task_manager_app/ui/widgets/snack_bar_msg.dart';
 
 import '../../../data/utils/urls.dart';
 

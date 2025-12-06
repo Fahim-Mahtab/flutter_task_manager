@@ -111,14 +111,14 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     );
     _inProgress = false;
     setState(() {});
-    if (response.isSuccess) {
-      Navigator.pushNamed(
-        context,
-        SetForgetPasswordScreen.routeName,
-        arguments: {"email": email, "otp": _pinTEController.text.trim()},
-      );
-    } else {
-      if (mounted) {
+    if (mounted) {
+      if (response.isSuccess) {
+        Navigator.pushNamed(
+          context,
+          SetForgetPasswordScreen.routeName,
+          arguments: {"email": email, "otp": _pinTEController.text.trim()},
+        );
+      } else {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(response.errorMessage)));

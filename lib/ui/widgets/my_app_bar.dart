@@ -48,12 +48,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           onPressed: () async {
             await AuthController.clearUserData();
-
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              SignInScreen.routeName,
-              (predicate) => false,
-            );
+            if (context.mounted) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                SignInScreen.routeName,
+                (predicate) => false,
+              );
+            }
           },
           icon: Icon(Icons.logout),
         ),

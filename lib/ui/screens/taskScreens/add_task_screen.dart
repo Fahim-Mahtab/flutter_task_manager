@@ -4,10 +4,8 @@ import 'package:task_manager_app/data/utils/urls.dart';
 import 'package:task_manager_app/ui/widgets/background_screen.dart';
 import 'package:task_manager_app/ui/widgets/my_app_bar.dart';
 import 'package:task_manager_app/ui/widgets/my_filled_button.dart';
-import 'package:task_manager_app/ui/widgets/snackbar_msg.dart';
+import 'package:task_manager_app/ui/widgets/snack_bar_msg.dart';
 
-import '../../../data/models/user_model.dart';
-import '../../controller/auth_controller.dart';
 import '../../widgets/custom_text_field.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -95,12 +93,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       Urls.createTask,
       body: requestBody,
     );
-    if (response.isSuccess) {
-      _isSubmitting = false;
-      _clearTextFields();
-      showSnackBar(context, "New Task Added");
-    } else {
-      showSnackBar(context, response.errorMessage);
+    if (mounted) {
+      if (response.isSuccess) {
+        _isSubmitting = false;
+        _clearTextFields();
+        showSnackBar(context, "New Task Added");
+      } else {
+        showSnackBar(context, response.errorMessage);
+      }
     }
   }
 

@@ -27,7 +27,7 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
                       'on my project and submit it '
                       'on time to me and my team members. ',
                   dateText: 'Date : 12/12/2023',
-                  onNewTap: _newTaskTapped,
+                //  onNewTap: _newTaskTapped,
                   onEditTap: _editTaskTapped,
                   onDeleteTap: _deleteTaskTapped,
                   buttonText: 'Cancelled',

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/task_model.dart';
+
 class TaskListContainer extends StatelessWidget {
   final String title;
   final String description;
   final String dateText;
   final String buttonText;
-  final VoidCallback onNewTap;
+  //  final VoidCallback onNewTap;
   final VoidCallback onEditTap;
   final VoidCallback onDeleteTap;
   final Color taskStatusColor;
@@ -16,12 +18,13 @@ class TaskListContainer extends StatelessWidget {
     required this.title,
     required this.description,
     required this.dateText,
-    required this.onNewTap,
+    // required this.onNewTap,
     required this.onEditTap,
     required this.onDeleteTap,
     required this.buttonText,
     required this.taskStatusColor,
   });
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,28 +63,26 @@ class TaskListContainer extends StatelessWidget {
                 SizedBox(height: 10),
                 Row(
                   children: [
-                    GestureDetector(
-                      onTap: onNewTap,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: taskStatusColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          buttonText,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: taskStatusColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        buttonText,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
+
                     Spacer(),
                     IconButton(
                       onPressed: onEditTap,

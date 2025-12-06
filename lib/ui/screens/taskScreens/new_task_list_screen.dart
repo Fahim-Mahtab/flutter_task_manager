@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/data/models/task_model.dart';
+import 'package:task_manager_app/data/service/network_caller.dart';
+import 'package:task_manager_app/data/utils/urls.dart';
 import 'package:task_manager_app/ui/screens/taskScreens/add_task_screen.dart';
+import 'package:task_manager_app/ui/widgets/snack_bar_msg.dart';
 
 import '../../widgets/task_list_container.dart';
 
@@ -17,6 +21,14 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _getNewTaskList();
+  }
+
+  List<TaskModel> _newTaskList = [];
+  bool _isLoading = false;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -24,28 +36,31 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
           children: [
             const SizedBox(),
             _buildWidgetCard(),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return TaskListContainer(
-                  title: 'This is new task',
-                  description:
-                      'Today im gonna finish my studies and work '
-                      'on my project and submit it '
-                      'on time to me and my team members. ',
-                  dateText: 'Date : 12/12/2023',
-                  onNewTap: _newTaskTapped,
-                  onEditTap: _editTaskTapped,
-                  onDeleteTap: _deleteTaskTapped,
-                  buttonText: 'New',
-                  taskStatusColor: Colors.blue,
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(height: 10);
-              },
+            Visibility(
+              visible: _isLoading == false,
+              replacement: Center(child: CircularProgressIndicator()),
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _newTaskList.length,
+                itemBuilder: (context, index) {
+                  return TaskListContainer(
+                    title: _newTaskList[index].title,
+                    description:
+                        'Description : ${_newTaskList[index].description}',
+                    dateText:
+                        'Date : ${_newTaskList[index].createdDate.toString().split(".")[0]}',
+
+                    onEditTap: _editTaskTapped,
+                    onDeleteTap: _deleteTaskTapped,
+                    buttonText: 'New',
+                    taskStatusColor: Colors.blue,
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(height: 10);
+                },
+              ),
             ),
           ],
         ),
@@ -57,6 +72,28 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
         child: Icon(Icons.add, color: Colors.white),
       ),
     );
+  }
+
+  Future<void> _getNewTaskList() async {
+    setState(() {
+      _isLoading = true;
+    });
+    NetworkResponse response = await NetworkCaller.getRequest(
+      Urls.listOfTaskByStatus,
+    );
+    if (response.isSuccess) {
+      _isLoading = false;
+      List<TaskModel> list = [];
+      for (Map<String, dynamic> jsonData in response.body["data"]) {
+        list.add(TaskModel.fromJson(jsonData));
+      }
+      _newTaskList = list;
+      setState(() {});
+    } else {
+      showSnackBar(context, response.errorMessage);
+    }
+    _isLoading = false;
+    setState(() {});
   }
 }
 
@@ -96,8 +133,6 @@ Widget _buildWidgetCard() {
     ),
   );
 }
-
-void _newTaskTapped() {}
 
 void _editTaskTapped() {}
 

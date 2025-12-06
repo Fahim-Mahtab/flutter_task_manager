@@ -120,11 +120,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     _inProgress = false;
     setState(() {});
     if (response.isSuccess) {
-      Navigator.pushNamed(
-        context,
-        PinVerificationScreen.routeName,
-        arguments: _emailController.text.trim(),
-      );
+      if (mounted) {
+        Navigator.pushNamed(
+          context,
+          PinVerificationScreen.routeName,
+          arguments: _emailController.text.trim(),
+        );
+      }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(
