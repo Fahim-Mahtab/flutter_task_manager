@@ -19,12 +19,12 @@ class TaskListContainer extends StatefulWidget {
     required this.title,
     required this.description,
     required this.dateText,
-    // required this.onNewTap,
+
     required this.onEditTap,
     required this.onDeleteTap,
     required this.buttonText,
     required this.taskStatusColor,
-    // 2. Add it to the constructor
+
   });
 
   @override
